@@ -60,7 +60,12 @@ export default {
   margin-left: 20px;
   cursor: pointer;
 }
+.titleDiv {
+  display: flex;
+  justify-content: center;
+}
 .title {
+  margin-left: 115px;
   font-family: "Amatic SC", cursive;
   font-size: 50px;
   color: #165fe3;

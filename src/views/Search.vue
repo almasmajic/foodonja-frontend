@@ -6,9 +6,9 @@
     </div>
     <div class="filter__buttons">
       <SearchFilterButton
-        :key="buttonfilter"
-        v-for="buttonfilter in filters"
-        :info="buttonfilter"
+        :key="filter"
+        v-for="filter in filters"
+        :info="filter"
       />
     </div>
   </div>
