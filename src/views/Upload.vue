@@ -34,12 +34,16 @@
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
 export default {
+  components: {
+    Multiselect,
+  },
   data() {
     return {
       value: null,
       options: [
-        "Gluten free",
+        { title: "Gluten free", img: "../assets/filter/gluten.png" },
         "Dairy free",
         "Vegetarian",
         "Sports meals",
@@ -70,6 +74,27 @@ export default {
   border-radius: 3%;
   font-family: "Dosis";
   font-size: 20px;
-  color: #165fe3; /*zasto oboja samo u buttonu*/
+  color: #165fe3;
+}
+.multiselect__tags {
+  background: rgba(124, 185, 232, 0.75);
+}
+.multiselect__placeholder {
+  font-family: "Dosis";
+  font-size: 20px;
+  color: #165fe3;
+}
+.multiselect__tag {
+  font-family: "Dosis";
+  background-color: rgba(196, 196, 196, 0.7);
+}
+.multiselect__content {
+  font-family: "Dosis";
+}
+.multiselect__element {
+  background-color: #ffffff;
+}
+.multiselect__option--highlight {
+  background: rgba(124, 185, 232, 0.75);
 }
 </style>

@@ -20,6 +20,9 @@ export default {
 </script>
 
 <style>
+.card-bg {
+  background-color: #165fe3;
+}
 .center {
   display: flex;
   justify-content: center;
@@ -34,5 +37,6 @@ export default {
   color: #ffffff;
   font-family: "Amatic SC";
   font-size: 20px;
+  width: 85%;
 }
 </style>
