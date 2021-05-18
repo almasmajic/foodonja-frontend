@@ -2,13 +2,22 @@
   <div class="app">
     <div class="search">
       <input type="text" placeholder="MMMM..." />
-      <button @click="search" type="submit">Sniff around</button>
+      <button type="submit">Sniff around</button>
     </div>
+
     <div class="filter__buttons">
       <SearchFilterButton
-        :key="filter"
+        :key="filter.id"
         v-for="filter in filters"
         :info="filter"
+      />
+    </div>
+
+    <div class="recipe__cards">
+      <RecipeCard
+        :key="recipeImage.id"
+        v-for="recipeImage in recipes"
+        :data="recipeImage"
       />
     </div>
   </div>
@@ -16,6 +25,7 @@
 
 <script>
 import SearchFilterButton from "../components/SearchFilterButton.vue";
+import RecipeCard from "../components/RecipeCard.vue";
 
 let filters = [];
 
@@ -46,14 +56,29 @@ export default {
   name: "Search",
   components: {
     SearchFilterButton,
+    RecipeCard,
   },
   data: function() {
     return {
       filters,
+      recipes: [
+        {
+          img: require("../assets/kuglice.jpg"),
+          title: "Energetske kuglice sa suhim voćem",
+          author: "Nastasja Chiara Petrić",
+          favourite: true,
+        },
+      ],
     };
   },
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+.multiselect__tags {
+  color: #165fe3;
+}
+</style>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dosis&display=swap");

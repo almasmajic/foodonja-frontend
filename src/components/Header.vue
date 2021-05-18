@@ -12,7 +12,7 @@
 
     <div class="icons">
       <div class="icon">
-        <img src="../assets/headerIcons/add.svg" />
+        <a href="/upload"><img src="../assets/headerIcons/add.svg"/></a>
         <p class="text" style="text-align: center; margin-left: 8px">
           Add a <br />
           new recipe
