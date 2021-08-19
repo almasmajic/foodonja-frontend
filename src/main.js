@@ -3,9 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import Croppa from "vue-croppa";
 import "vue-croppa/dist/vue-croppa.css";
-import Multiselect from "vue-multiselect";
-
-Vue.component("multiselect", Multiselect);
 
 Vue.config.productionTip = false;
 

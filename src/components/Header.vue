@@ -24,7 +24,7 @@
         <br />
       </div>
       <div class="icon">
-        <img src="../assets/headerIcons/profile.svg" />
+        <a href="/MyProfile"><img src="../assets/headerIcons/profile.svg"/></a>
         <p class="text" style="margin-left: 10px">My profile</p>
         <br />
       </div>

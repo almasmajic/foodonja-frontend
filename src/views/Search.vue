@@ -74,12 +74,6 @@ export default {
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css">
-.multiselect__tags {
-  color: #165fe3;
-}
-</style>
-
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dosis&display=swap");
 

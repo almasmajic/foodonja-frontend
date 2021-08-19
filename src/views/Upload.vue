@@ -19,12 +19,6 @@
         <input type="text" name="How to" placeholder="How to" /><br /><br />
         <!-- <input type="text" name="Category" placeholder="Category" /> -->
 
-        <multiselect
-          v-model="value"
-          :options="options"
-          :multiple="true"
-          :close-on-select="false"
-        ></multiselect>
         <br />
 
         <input type="submit" value="Upload a recipe" />
@@ -34,11 +28,7 @@
 </template>
 
 <script>
-import Multiselect from "vue-multiselect";
 export default {
-  components: {
-    Multiselect,
-  },
   data() {
     return {
       value: null,
