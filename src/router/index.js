@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Search from "../views/Search";
 import Upload from "../views/Upload";
 import MyProfile from "../views/MyProfile";
+import Login from "../views/Login";
+import SignUp from "../views/SignUp";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,16 @@ const routes = [
     path: "/myprofile",
     name: "MyProfile",
     component: MyProfile,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp,
   },
 ];
 

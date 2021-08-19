@@ -66,25 +66,4 @@ export default {
   font-size: 20px;
   color: #165fe3;
 }
-.multiselect__tags {
-  background: rgba(124, 185, 232, 0.75);
-}
-.multiselect__placeholder {
-  font-family: "Dosis";
-  font-size: 20px;
-  color: #165fe3;
-}
-.multiselect__tag {
-  font-family: "Dosis";
-  background-color: rgba(196, 196, 196, 0.7);
-}
-.multiselect__content {
-  font-family: "Dosis";
-}
-.multiselect__element {
-  background-color: #ffffff;
-}
-.multiselect__option--highlight {
-  background: rgba(124, 185, 232, 0.75);
-}
 </style>
