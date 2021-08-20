@@ -1,15 +1,11 @@
 <template>
   <div class="row">
     <div class="col-2"></div>
-    <div class="col-3 mt-3">
-      <recipe-card />
+    <div class="col-3 mt-3 d-flex flex-column-reverse">
+      <recipe-card v-for="recipe in recipes" :key="recipe" :info="recipe" />
     </div>
-    <div class="col-3 mt-3">
-      <recipe-card />
-    </div>
-    <div class="col-3 mt-3">
-      <recipe-card />
-    </div>
+    <div class="col-3 mt-3"></div>
+    <div class="col-3 mt-3"></div>
     <div class="col-2"></div>
   </div>
 </template>
@@ -17,8 +13,22 @@
 <script>
 import RecipeCard from "@/components/RecipeCard.vue";
 
+let recipes = [];
+
+recipes = [
+  "https://picsum.photos/id/1/500/500",
+  "https://picsum.photos/id/2/500/500",
+  "https://picsum.photos/id/3/500/500",
+  "https://picsum.photos/id/4/500/500",
+];
+
 export default {
   name: "search",
+  data: function() {
+    return {
+      recipes: recipes,
+    };
+  },
   components: {
     RecipeCard,
   },

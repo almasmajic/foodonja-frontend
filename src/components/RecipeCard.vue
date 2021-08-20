@@ -1,12 +1,10 @@
 <template>
   <div>
     <div class="card text-center">
-      <div class="card-header text-muted">
-        2 DAYS AGO
-      </div>
+      <div class="card-header text-muted">2 DAYS AGO</div>
       <div class="card-body">
         <h5 class="card-title">Recipe name</h5>
-        <img src="https://picsum.photos/500" />
+        <img :src="info" />
         <a href="#" class="btn btn-primary mt-2">View recipe</a>
       </div>
       <div class="card-footer">
@@ -30,6 +28,7 @@
 
 <script>
 export default {
+  props: ["info"],
   name: "RecipeCard",
 };
 </script>
