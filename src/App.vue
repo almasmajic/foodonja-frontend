@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header title="whatever" />
+    <Header />
     <img class="image1" src="./assets/ellipse.png" />
     <img class="image2" src="./assets/ellipse2.png" />
     <img class="image3" src="./assets/ellipse3.png" />

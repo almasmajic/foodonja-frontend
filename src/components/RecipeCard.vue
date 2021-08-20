@@ -1,5 +1,21 @@
 <template>
-  <div class="center">
+  <div>
+    <div class="card text-center">
+      <div class="card-header text-muted">
+        2 DAYS AGO
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Recipe name</h5>
+        <img src="https://picsum.photos/500" />
+        <a href="#" class="btn btn-primary mt-2">View recipe</a>
+      </div>
+      <div class="card-footer">
+        Published by: DOHVATI IME
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="center">
     <div class="recipe">
       <img :src="data.img" style="width:100%" />
       <div class="container">
@@ -9,34 +25,11 @@
         <p>{{ data.author }}</p>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 export default {
   name: "RecipeCard",
-  props: ["data"],
 };
 </script>
-
-<style>
-.card-bg {
-  background-color: #165fe3;
-}
-.center {
-  display: flex;
-  justify-content: center;
-  padding-top: 30px;
-}
-.recipe {
-  width: 40%;
-}
-.container {
-  padding: 2px 16px;
-  background-color: #165fe3;
-  color: #ffffff;
-  font-family: "Amatic SC";
-  font-size: 20px;
-  width: 85%;
-}
-</style>

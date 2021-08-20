@@ -17,9 +17,8 @@
         <input type="text" name="Ingredients" placeholder="Ingredients" /><br />
         <br />
         <input type="text" name="How to" placeholder="How to" /><br /><br />
-        <!-- <input type="text" name="Category" placeholder="Category" /> -->
 
-        <br />
+        <br /><br />
 
         <input type="submit" value="Upload a recipe" />
       </form>

@@ -1,75 +1,26 @@
 <template>
-  <div class="app">
-    <div class="search">
-      <input type="text" placeholder="MMMM..." />
-      <button type="submit">Sniff around</button>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-3 mt-3">
+      <recipe-card />
     </div>
-
-    <div class="filter__buttons">
-      <SearchFilterButton
-        :key="filter.id"
-        v-for="filter in filters"
-        :info="filter"
-      />
+    <div class="col-3 mt-3">
+      <recipe-card />
     </div>
-
-    <div class="recipe__cards">
-      <RecipeCard
-        :key="recipeImage.id"
-        v-for="recipeImage in recipes"
-        :data="recipeImage"
-      />
+    <div class="col-3 mt-3">
+      <recipe-card />
     </div>
+    <div class="col-2"></div>
   </div>
 </template>
 
 <script>
-import SearchFilterButton from "../components/SearchFilterButton.vue";
-import RecipeCard from "../components/RecipeCard.vue";
-
-let filters = [];
-
-filters = [
-  {
-    img: require("../assets/filter/gluten.png"),
-    filterName: "GLUTEN FREE",
-  },
-  {
-    img: require("../assets/filter/lactose.png"),
-    filterName: "DAIRY FREE",
-  },
-  {
-    img: require("../assets/filter/vege.png"),
-    filterName: "VEGETARIAN",
-  },
-  {
-    img: require("../assets/filter/sports.png"),
-    filterName: "SPORTS MEALS",
-  },
-  {
-    img: require("../assets/filter/finger-snap.png"),
-    filterName: "QUICK AND EASY",
-  },
-];
+import RecipeCard from "@/components/RecipeCard.vue";
 
 export default {
-  name: "Search",
+  name: "search",
   components: {
-    SearchFilterButton,
     RecipeCard,
-  },
-  data: function() {
-    return {
-      filters,
-      recipes: [
-        {
-          img: require("../assets/kuglice.jpg"),
-          title: "Energetske kuglice sa suhim voćem",
-          author: "Nastasja Chiara Petrić",
-          favourite: true,
-        },
-      ],
-    };
   },
 };
 </script>

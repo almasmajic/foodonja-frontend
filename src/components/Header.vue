@@ -7,7 +7,7 @@
     </div>
 
     <div class="titleDiv">
-      <h3 class="title">{{ title }}</h3>
+      <h3 class="title">{{ $route.meta.title }}</h3>
     </div>
 
     <div class="icons">
@@ -19,7 +19,9 @@
         </p>
       </div>
       <div class="icon">
-        <img src="../assets/headerIcons/favourites.svg" />
+        <a href="/Favourites"
+          ><img src="../assets/headerIcons/favourites.svg"
+        /></a>
         <p class="text" style="margin-left: 10px">Favourites</p>
         <br />
       </div>
