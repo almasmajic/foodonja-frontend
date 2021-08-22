@@ -1,36 +1,98 @@
 <template>
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-3 mt-3 d-flex flex-column-reverse">
-      <recipe-card v-for="recipe in recipes" :key="recipe" :info="recipe" />
+  <div class="app">
+    <div class="search">
+      <input v-model="searchText" type="search" placeholder="MMMM..." />
+      <button @click="search" type="submit">Sniff around</button>
     </div>
-    <div class="col-3 mt-3"></div>
-    <div class="col-3 mt-3"></div>
-    <div class="col-2"></div>
+    <div class="filter__buttons">
+      <SearchFilterButton
+        :key="buttonfilter.id"
+        v-for="buttonfilter in filter"
+        :info="buttonfilter"
+      />
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-3 mt-3 d-flex flex-column-reverse">
+        <recipe-card
+          v-for="recipe in recipes"
+          :key="recipe.id"
+          :info="recipe"
+        />
+      </div>
+      <div class="col-3 mt-3"></div>
+      <div class="col-3 mt-3"></div>
+      <div class="col-2"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import SearchFilterButton from "../components/SearchFilterButton.vue";
 import RecipeCard from "@/components/RecipeCard.vue";
+import { Filters } from "@/service";
 
-let recipes = [];
-
-recipes = [
-  "https://picsum.photos/id/1/500/500",
-  "https://picsum.photos/id/2/500/500",
-  "https://picsum.photos/id/3/500/500",
-  "https://picsum.photos/id/4/500/500",
+let recipes = [
+  {
+    url: "https://picsum.photos/id/1/500/500",
+    description: "new pc",
+    time: "Just now",
+  },
+  {
+    url: "https://picsum.photos/id/2/500/500",
+    description: "office",
+    time: "A day ago",
+  },
 ];
+
+/*let filterss = [
+  {
+    img: require("../assets/filter/gluten.png"),
+    filterName: "GLUTEN FREE",
+  },
+  {
+    img: require("../assets/filter/lactose.png"),
+    filterName: "DAIRY FREE",
+  },
+  {
+    img: require("../assets/filter/vege.png"),
+    filterName: "VEGETARIAN",
+  },
+  {
+    img: require("../assets/filter/sports.png"),
+    filterName: "SPORTS MEALS",
+  },
+  {
+    img: require("../assets/filter/finger-snap.png"),
+    filterName: "QUICK AND EASY",
+  },
+];*/
 
 export default {
   name: "search",
-  data: function() {
+
+  data() {
     return {
-      recipes: recipes,
+      recipes,
+      filter: { type: Array },
+      searchText: "",
     };
+  },
+
+  created() {
+    this.filtersBck();
+  },
+
+  methods: {
+    search() {},
+
+    async filtersBck(term) {
+      this.filter = await Filters.getAll(term);
+    },
   },
   components: {
     RecipeCard,
+    SearchFilterButton,
   },
 };
 </script>

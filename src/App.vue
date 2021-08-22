@@ -6,12 +6,20 @@
     <img class="image3" src="./assets/ellipse3.png" />
 
     <router-view />
+    {{ searchText }}
   </div>
 </template>
 
 <script>
+import store from "@/store";
 import Header from "@/components/Header";
 export default {
+  name: "app",
+  data() {
+    return {
+      searchText: "primjer texta",
+    };
+  },
   components: {
     Header,
   },

@@ -11,11 +11,12 @@
                     Log in
                   </p>
 
-                  <form class="mx-1 mx-md-4">
+                  <form @submit.prevent="login" class="mx-1 mx-md-4">
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="email"
                           type="email"
                           id="form3Example3c"
                           class="form-control"
@@ -30,6 +31,7 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="password"
                           type="password"
                           id="form3Example4c"
                           class="form-control"
@@ -43,7 +45,7 @@
                     <div
                       class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                     >
-                      <button type="button" class="btn btn-primary btn-lg">
+                      <button type="submit" class="btn btn-primary btn-lg">
                         Login
                       </button>
                     </div>
@@ -66,6 +68,36 @@
     </div>
   </section>
 </template>
+
+<script>
+import { Auth } from "../service/index.js";
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+
+      showError: false,
+    };
+  },
+
+  methods: {
+    async login() {
+      try {
+        let succes = await Auth.login(this.email, this.password);
+        console.log("Rezultat prijave", succes);
+        if ((succes == true && this.email !== "") || this.password !== "") {
+          this.$router.replace({ path: "/search" });
+          this.$router.go();
+        }
+      } catch (e) {
+        this.showError = true;
+      }
+    },
+  },
+};
+</script>
 
 <style>
 .container {

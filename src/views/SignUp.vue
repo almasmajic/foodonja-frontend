@@ -11,15 +11,25 @@
                     Sign up
                   </p>
 
-                  <form class="mx-1 mx-md-4">
+                  <form
+                    novalidate
+                    @submit.prevent="registerUsers"
+                    class="mx-1 mx-md-4"
+                  >
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="username"
                           type="text"
                           id="form3Example1c"
-                          class="form-control"
                         />
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="!$v.username.required"
+                        >
+                          Username is required
+                        </div>
                         <label class="form-label" for="form3Example1c"
                           >Masterchef's name (Username)</label
                         >
@@ -30,10 +40,22 @@
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="email"
                           type="email"
                           id="form3Example3c"
-                          class="form-control"
                         />
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="!$v.email.required"
+                        >
+                          Email is required
+                        </div>
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="email && !$v.email.email"
+                        >
+                          Enter valid email address
+                        </div>
                         <label class="form-label" for="form3Example3c"
                           >Email address</label
                         >
@@ -44,10 +66,23 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="password"
                           type="password"
                           id="form3Example4c"
-                          class="form-control"
                         />
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="!$v.password.minLength"
+                        >
+                          Password should have at least
+                          {{ $v.password.$params.minLength.min }} characters.
+                        </div>
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="!$v.password.required"
+                        >
+                          Password is required
+                        </div>
                         <label class="form-label" for="form3Example4c"
                           >Secret ingredient (Password)</label
                         >
@@ -58,10 +93,24 @@
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input
+                          v-model="repPassword"
                           type="password"
                           id="form3Example4cd"
-                          class="form-control"
                         />
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="!$v.repPassword.required"
+                        >
+                          Repeated password is required
+                        </div>
+
+                        <div
+                          style="font-size:15px; color:red;"
+                          v-if="repPassword && !$v.repPassword.sameAsPassword"
+                        >
+                          Password and Confirm Password should match
+                        </div>
+
                         <label class="form-label" for="form3Example4cd"
                           >Repeat your password</label
                         >
@@ -70,20 +119,34 @@
 
                     <div class="form-check d-flex justify-content-center mb-5">
                       <input
+                        v-model="checked"
                         class="form-check-input me-2"
                         type="checkbox"
-                        value=""
                         id="form2Example3c"
+                        @change="$v.checked.$touch()"
                       />
+
                       <label class="form-check-label" for="form2Example3">
                         I accept <b>terms of cooking</b>
                       </label>
+
+                      <div class="invalid-feedback">
+                        cekiraj
+                      </div>
                     </div>
+
+                    <span class="text-center" v-if="showError"
+                      ><p style="color:red;">E-mail already exist</p></span
+                    >
 
                     <div
                       class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                     >
-                      <button type="button" class="btn btn-primary btn-lg">
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-lg"
+                        :disabled="this.isDisabled"
+                      >
                         Register
                       </button>
                     </div>
@@ -106,6 +169,85 @@
     </div>
   </section>
 </template>
+
+<script>
+import { Auth } from "../service/index.js";
+import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
+
+export default {
+  data() {
+    return {
+      showError: false,
+      showError1: false,
+      showError2: false,
+      checked: false,
+
+      username: "",
+      email: "",
+      password: "",
+      repPassword: "",
+
+      submitted: false,
+    };
+  },
+
+  validations: {
+    password: {
+      required,
+      minLength: minLength(6),
+    },
+    repPassword: { required, sameAsPassword: sameAs("password") },
+
+    email: {
+      required,
+      email,
+    },
+
+    username: {
+      required,
+    },
+
+    checked: {
+      sameAs: sameAs(() => true),
+    },
+  },
+
+  created() {
+    this.submitted = true;
+    return this.$v.$touch();
+  },
+  computed: {
+    isDisabled() {
+      return this.$v.$invalid;
+    },
+  },
+
+  methods: {
+    async registerUsers() {
+      this.submitted = true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return false; // stop here if form is invalid
+      } else {
+        try {
+          let succes = await Auth.register(
+            this.username,
+            this.email,
+            this.password
+          );
+          console.log("Rezultat registracije", succes);
+          if (succes == true) {
+            this.$router.push({ path: "/search" });
+          }
+        } catch (e) {
+          console.log(e);
+          this.showError = true;
+        }
+      }
+    },
+  },
+};
+</script>
 
 <style>
 .container {

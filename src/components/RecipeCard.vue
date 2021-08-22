@@ -1,14 +1,15 @@
 <template>
   <div>
     <div class="card text-center">
-      <div class="card-header text-muted">2 DAYS AGO</div>
+      <div class="card-header">Published by: DOHVATI IME</div>
       <div class="card-body">
         <h5 class="card-title">Recipe name</h5>
-        <img :src="info" />
-        <a href="#" class="btn btn-primary mt-2">View recipe</a>
+        <img :src="info.url" />
+        <p class="mt-3">{{ info.description }}</p>
+        <a href="#" class="btn btn-primary mt-1">View recipe</a>
       </div>
-      <div class="card-footer">
-        Published by: DOHVATI IME
+      <div class="card-footer text-muted">
+        {{ info.time }}
       </div>
     </div>
   </div>
