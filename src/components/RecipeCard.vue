@@ -1,11 +1,10 @@
 <template>
   <div class="card text-center">
-    <div class="card-header">Published by: DOHVATI IME</div>
     <div class="card-body">
-      <h5 class="card-title">Recipe name</h5>
       <img :src="info.url" class="recipeimg" />
-      <p class="mt-3">{{ info.description }}</p>
-      <a href="#" class="btn btn-primary mt-1">View recipe</a>
+      <h5 class="card-title">Recipe name</h5>
+      <p class="mt-3">Recipe published by: DOHVATI IME</p>
+      <a href="#" class="btn btn-primary mt-1">RECIPE</a>
     </div>
     <div class="card-footer text-muted">
       {{ info.time }}

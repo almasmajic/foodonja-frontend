@@ -1,20 +1,8 @@
 <template>
   <div id="app">
-    <img
-      class="image1"
-      src="./assets/ellipse.png"
-      v-if="currentRouteName != 'Splashscreen'"
-    />
-    <img
-      class="image2"
-      src="./assets/ellipse2.png"
-      v-if="currentRouteName != 'Splashscreen'"
-    />
-    <img
-      class="image3"
-      src="./assets/ellipse3.png"
-      v-if="currentRouteName != 'Splashscreen'"
-    />
+    <img class="image1" src="./assets/ellipse.png" />
+    <img class="image2" src="./assets/ellipse2.png" />
+    <img class="image3" src="./assets/ellipse3.png" />
 
     <router-view />
     <!-- {{ searchText }}-->
