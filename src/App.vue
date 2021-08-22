@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <Header />
-    <img class="image1" src="./assets/ellipse.png" />
-    <img class="image2" src="./assets/ellipse2.png" />
-    <img class="image3" src="./assets/ellipse3.png" />
+    <img
+      class="image1"
+      src="./assets/ellipse.png"
+      v-if="currentRouteName != 'Splashscreen'"
+    />
+    <img
+      class="image2"
+      src="./assets/ellipse2.png"
+      v-if="currentRouteName != 'Splashscreen'"
+    />
+    <img
+      class="image3"
+      src="./assets/ellipse3.png"
+      v-if="currentRouteName != 'Splashscreen'"
+    />
 
     <router-view />
-    {{ searchText }}
+    <!-- {{ searchText }}-->
   </div>
 </template>
 
@@ -15,6 +26,12 @@ import store from "@/store";
 import Header from "@/components/Header";
 export default {
   name: "app",
+
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    },
+  },
   data() {
     return {
       searchText: "primjer texta",

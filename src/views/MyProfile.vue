@@ -19,43 +19,41 @@
         </div>
         <div class="card mb-3 mt-3">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Full Name</h6>
+            <form @submit.prevent="update">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Password</h6>
+                  <input
+                    v-model="current_password"
+                    type="password"
+                    name="current_password"
+                  />
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  ******
+                </div>
               </div>
-              <div class="col-sm-9 text-secondary">
-                Alma Smajic
+              <hr />
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">New password</h6>
+                  <input
+                    v-model="new_password"
+                    type="password"
+                    name="new_password"
+                  />
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  ******
+                </div>
               </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
+              <hr />
+              <div class="row">
+                <div class="col-sm-12 d-flex justify-content-center">
+                  <button type="submit" class="button">Change password</button>
+                </div>
               </div>
-              <div class="col-sm-9 text-secondary">
-                asmajic@gmail.com
-              </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Password</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                ******
-              </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-12 d-flex justify-content-center">
-                <a
-                  class="btn btn-info "
-                  target="__blank"
-                  href="https://github.com/almasmajic/foodonja-frontend"
-                  >Edit profile</a
-                >
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

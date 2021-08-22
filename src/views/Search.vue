@@ -11,18 +11,12 @@
         :info="buttonfilter"
       />
     </div>
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-3 mt-3 d-flex flex-column-reverse">
-        <recipe-card
-          v-for="recipe in recipes"
-          :key="recipe.id"
-          :info="recipe"
-        />
+    <div style="height:auto; margin:10px 200px">
+      <div class="row">
+        <div class="col-4 mt-4" v-for="recipe in recipes" :key="recipe.id">
+          <div class="card"><recipe-card :info="recipe" /></div>
+        </div>
       </div>
-      <div class="col-3 mt-3"></div>
-      <div class="col-3 mt-3"></div>
-      <div class="col-2"></div>
     </div>
   </div>
 </template>
@@ -33,6 +27,26 @@ import RecipeCard from "@/components/RecipeCard.vue";
 import { Filters } from "@/service";
 
 let recipes = [
+  {
+    url: "https://picsum.photos/id/1/500/500",
+    description: "new pc",
+    time: "Just now",
+  },
+  {
+    url: "https://picsum.photos/id/2/500/500",
+    description: "office",
+    time: "A day ago",
+  },
+  {
+    url: "https://picsum.photos/id/1/500/500",
+    description: "new pc",
+    time: "Just now",
+  },
+  {
+    url: "https://picsum.photos/id/2/500/500",
+    description: "office",
+    time: "A day ago",
+  },
   {
     url: "https://picsum.photos/id/1/500/500",
     description: "new pc",
