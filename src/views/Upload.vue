@@ -1,16 +1,5 @@
 <template>
   <div class="main">
-    <div class="upload">
-      <croppa
-        class="croppa__frame"
-        :width="450"
-        :height="350"
-        :canvas-color="'rgba(255, 193, 7, 0.3)'"
-        placeholder="Upload a photo"
-        v-model="imageReference"
-      ></croppa>
-    </div>
-
     <div class="form">
       <form>
         <label>Please fill out the following:</label><br /><br />
@@ -21,10 +10,22 @@
                 v-if="field.type === 'input'"
                 :type="field.type"
                 v-model="field.value"
+                :style="{ width: field.width }"
                 :placeholder="field.placeholder"
               />
+              <template v-else-if="field.type === 'textarea'">
+                <textarea
+                  :rows="field.rows"
+                  v-model="field.value"
+                  :style="{ width: field.width }"
+                  :placeholder="field.placeholder"
+                ></textarea>
+              </template>
               <template v-else-if="field.type === 'dropdown'">
                 <button
+                  :class="
+                    renderFieldValue(field) == 'Category' ? 'category' : ''
+                  "
                   type="button"
                   @click="field.show = !field.show"
                   v-text="renderFieldValue(field)"
@@ -45,8 +46,12 @@
             </div>
           </li>
         </ul>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <input type="submit" value="Upload a recipe" />
+        <input
+          type="button"
+          class="uploadButton"
+          @click="getData()"
+          value="Upload a recipe"
+        />
       </form>
     </div>
   </div>
@@ -61,18 +66,37 @@ export default {
           id: 1,
           type: "input",
           value: "",
-          placeholder: "Ingredients",
+          width: "400px",
+          placeholder: "Image URL",
         },
         {
           id: 2,
-          type: "input",
+          type: "textarea",
+          rows: 3,
           value: "",
-          placeholder: "How to",
+          width: "400px",
+          placeholder: "Ingredients",
         },
         {
           id: 3,
+          type: "textarea",
+          rows: 5,
+          value: "",
+          width: "400px",
+          placeholder: "How to",
+        },
+        {
+          id: 4,
+          type: "input",
+          value: "",
+          width: "400px",
+          placeholder: "Prep time",
+        },
+        {
+          id: 5,
           type: "dropdown",
           value: "Category",
+          width: "400px",
           selectedValues: [],
           show: false,
           items: [
@@ -123,6 +147,10 @@ export default {
       }
       return field.value;
     },
+
+    getData() {
+      console.log(this.fields);
+    },
   },
 };
 </script>
@@ -141,8 +169,9 @@ export default {
   display: flex;
   justify-content: center;
 }
-.form input {
-  background-color: rgba(124, 185, 232, 0.75);
+.form input,
+.form textarea {
+  background-color: #99c7ea;
   border: 0;
   border-radius: 3%;
   font-family: "Dosis";
@@ -159,18 +188,29 @@ export default {
 }
 
 .fields__list-item input,
-.fields__list-item button {
+.fields__list-item button,
+.fields__list-item textarea {
   width: 100%;
   text-align: left;
   background-color: #9ac7ea;
   border: none;
   padding: 10px 5px;
   border-radius: 10px;
-  color: white;
+  color: black;
   font-size: 18px;
 }
 
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #276ce4;
+  opacity: 1; /* Firefox */
+}
+
 .fields__list-item input:focus {
+  outline: none;
+}
+
+.fields__list-item textarea:focus {
   outline: none;
 }
 
@@ -186,7 +226,7 @@ export default {
   position: absolute;
   z-index: 10;
   right: 20px;
-  top: 10px;
+  top: 0px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -194,10 +234,26 @@ export default {
 
 .dropdown__list-item {
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 10px 5px;
+  padding: 5px 10px;
   font-size: 16px;
   text-transform: uppercase;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.uploadButton {
+  margin-top: 201px;
+  margin-left: 120px;
+  padding: 10px 26px;
+  border-radius: 15px !important;
+  color: #000 !important;
+}
+
+.category {
+  color: #165fe3 !important;
+}
+
+textarea {
+  resize: none;
 }
 </style>

@@ -4,16 +4,20 @@
       <input v-model="searchText" type="search" placeholder="MMMM..." />
       <button @click="search" type="submit">Sniff around</button>
     </div>
-    <div class="filter__buttons">
+    <!--<div class="filter__buttons">
       <SearchFilterButton
         :key="buttonfilter.id"
         v-for="buttonfilter in filter"
         :info="buttonfilter"
       />
-    </div>
-    <div style="height:auto; margin:10px 200px">
+    </div>-->
+    <div style="height:auto; margin:40px 220px">
       <div class="row">
-        <div class="col-4 mt-4" v-for="recipe in recipes" :key="recipe.id">
+        <div
+          class="col-4 mt-4 recipeWrapper"
+          v-for="recipe in recipes"
+          :key="recipe.id"
+        >
           <div class="card"><recipe-card :info="recipe" /></div>
         </div>
       </div>
@@ -28,34 +32,46 @@ import { Filters } from "@/service";
 
 let recipes = [
   {
-    url: "https://picsum.photos/id/1/500/500",
-    description: "new pc",
+    url: "https://picsum.photos/id/1/500/350",
+    description: "The Best Recipe ever, you have to try.",
     time: "Just now",
+    publishedBy: "GORDON RAMSAY",
+    liked: true,
   },
   {
-    url: "https://picsum.photos/id/2/500/500",
+    url: "https://picsum.photos/id/2/500/350",
     description: "office",
     time: "A day ago",
+    publishedBy: "GORDON RAMSAY",
+    liked: false,
   },
   {
-    url: "https://picsum.photos/id/1/500/500",
+    url: "https://picsum.photos/id/1/500/350",
     description: "new pc",
     time: "Just now",
+    publishedBy: "GORDON RAMSAY",
+    liked: true,
   },
   {
-    url: "https://picsum.photos/id/2/500/500",
+    url: "https://picsum.photos/id/2/500/350",
     description: "office",
     time: "A day ago",
+    publishedBy: "GORDON RAMSAY",
+    liked: false,
   },
   {
-    url: "https://picsum.photos/id/1/500/500",
+    url: "https://picsum.photos/id/1/500/350",
     description: "new pc",
     time: "Just now",
+    publishedBy: "GORDON RAMSAY",
+    liked: false,
   },
   {
-    url: "https://picsum.photos/id/2/500/500",
+    url: "https://picsum.photos/id/2/500/350",
     description: "office",
     time: "A day ago",
+    publishedBy: "GORDON RAMSAY",
+    liked: false,
   },
 ];
 
@@ -145,5 +161,12 @@ export default {
 .filter__buttons {
   gap: 20px; /* ne radi na svim browserima */
   /*margin-right: 20px*/
+}
+.card {
+  width: auto !important;
+}
+.recipeWrapper {
+  padding-left: 20px;
+  padding-top: 29px;
 }
 </style>
