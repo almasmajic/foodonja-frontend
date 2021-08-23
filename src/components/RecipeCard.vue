@@ -6,7 +6,7 @@
         <i>{{ info.description }}</i>
       </h5>
       <p class="publishby">RECIPE PUBLISHED BY : {{ info.publishedBy }}</p>
-      <a href="#" class="btn viewRecipe mt-1">RECIPE</a>
+      <a class="btn viewRecipe mt-1" @click="showRecipe()">RECIPE</a>
       <span v-if="info.liked"><i class="fa fa-heart likebutton"></i></span>
       <span v-if="!info.liked"><i class="far fa-heart likebutton"></i></span>
       <div class="time">{{ info.time }}</div>
@@ -43,6 +43,11 @@ export default {
   name: "RecipeCard",
   data() {
     return {};
+  },
+  methods: {
+    showRecipe() {
+      this.$router.push({ name: "RecipeDetail" });
+    },
   },
 };
 </script>

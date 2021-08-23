@@ -4,7 +4,7 @@ import Login from "../views/Login";
 import SignUp from "../views/SignUp";
 import Search from "../views/Search";
 import Upload from "../views/Upload";
-import Home from "../views/Home";
+import RecipeDetail from "../views/RecipeDetail";
 import MyProfile from "../views/MyProfile";
 import Favourites from "../views/Favourites";
 
@@ -13,15 +13,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-    meta: { title: "" },
-  },
-  {
-    path: "/splashscreen",
-    name: "Home",
-    component: Home,
-    meta: { title: "" },
+    redirect: "/splashscreen",
   },
   {
     path: "/search",
@@ -58,6 +50,12 @@ const routes = [
     name: "Favourites",
     component: Favourites,
     meta: { title: "Favourites" },
+  },
+  {
+    path: "/recipe-detail",
+    name: "RecipeDetail",
+    component: RecipeDetail,
+    meta: { title: "" },
   },
 ];
 
