@@ -16,14 +16,11 @@
       src="./assets/ellipse3.png"
       v-if="currentRouteName != 'Home'"
     />
-
     <router-view />
-    <!-- {{ searchText }}-->
   </div>
 </template>
 
 <script>
-import store from "@/store";
 import Header from "@/components/Header";
 export default {
   name: "app",
@@ -32,11 +29,6 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
-  },
-  data() {
-    return {
-      searchText: "primjer texta",
-    };
   },
   components: {
     Header,

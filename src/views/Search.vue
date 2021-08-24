@@ -1,24 +1,22 @@
 <template>
   <div class="app">
     <div class="search">
-      <input v-model="searchText" type="search" placeholder="MMMM..." />
-      <button @click="search" type="submit">Sniff around</button>
-    </div>
-    <!--<div class="filter__buttons">
-      <SearchFilterButton
-        :key="buttonfilter.id"
-        v-for="buttonfilter in filter"
-        :info="buttonfilter"
+      <input
+        v-model="store.searchTerm"
+        type="search"
+        placeholder="Sniff around..."
       />
-    </div>-->
+    </div>
     <div style="height:auto; margin:40px 220px">
       <div class="row">
         <div
           class="col-4 mt-4 recipeWrapper"
-          v-for="recipe in recipes"
+          v-for="recipe in filteredRecipes"
           :key="recipe.id"
         >
-          <div class="card"><recipe-card :info="recipe" /></div>
+          <div class="card">
+            <recipe-card :info="recipe" />
+          </div>
         </div>
       </div>
     </div>
@@ -26,9 +24,9 @@
 </template>
 
 <script>
+import store from "@/store";
 import SearchFilterButton from "../components/SearchFilterButton.vue";
 import RecipeCard from "@/components/RecipeCard.vue";
-import { Filters } from "@/service";
 
 let recipes = [
   {
@@ -75,49 +73,29 @@ let recipes = [
   },
 ];
 
-/*let filterss = [
-  {
-    img: require("../assets/filter/gluten.png"),
-    filterName: "GLUTEN FREE",
-  },
-  {
-    img: require("../assets/filter/lactose.png"),
-    filterName: "DAIRY FREE",
-  },
-  {
-    img: require("../assets/filter/vege.png"),
-    filterName: "VEGETARIAN",
-  },
-  {
-    img: require("../assets/filter/sports.png"),
-    filterName: "SPORTS MEALS",
-  },
-  {
-    img: require("../assets/filter/finger-snap.png"),
-    filterName: "QUICK AND EASY",
-  },
-];*/
-
 export default {
   name: "search",
 
   data() {
     return {
+      store,
       recipes,
-      filter: { type: Array },
-      searchText: "",
     };
   },
+  computed: {
+    filteredRecipes() {
+      //filtriranje recepata
+      let condition = this.store.searchTerm; //condition je varijabla ciji se uvjet mora ispunit kako bi se trazili samo odredeni recepti
+      //console.log(condition);
+      let newRecipes = [];
 
-  created() {
-    this.filtersBck();
-  },
-
-  methods: {
-    search() {},
-
-    async filtersBck(term) {
-      this.filter = await Filters.getAll(term);
+      for (let recipe of this.recipes) {
+        //console.log(recipe.description);
+        if (recipe.description.indexOf(condition) >= 0) {
+          newRecipes.push(recipe);
+        }
+      }
+      return newRecipes;
     },
   },
   components: {
