@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Splashscreen from "../views/Splashscreen";
 import Login from "../views/Login";
 import SignUp from "../views/SignUp";
 import Search from "../views/Search";
@@ -14,6 +15,11 @@ const routes = [
   {
     path: "/",
     redirect: "/splashscreen",
+  },
+  {
+    path: "/splashscreen",
+    name: "Splashscreen",
+    component: Splashscreen,
   },
   {
     path: "/search",

@@ -3,69 +3,71 @@
     <div class="form">
       <div class="fields__list">
         <label>Please fill out the following:</label><br />
-        <div class="form-group col-md-12">
-          <input
-            v-model="photo"
-            type="url"
-            class="form-control"
-            id="uploadPhoto"
-            placeholder="Image URL"
-          />
-        </div>
-        <div class="form-group col-md-12 mt-2">
-          <input
-            v-model="name"
-            type="text"
-            class="form-control"
-            id="provideName"
-            placeholder="Recipe name"
-            required
-          />
-        </div>
-        <div class="form-group col-md-12 mt-2">
-          <textarea
-            v-model="ingredients"
-            class="form-control"
-            id="listIngredients"
-            rows="6"
-            placeholder="Ingredients"
-            required
-          ></textarea>
-        </div>
-        <div class="form-group col-md-12 mt-2">
-          <textarea
-            v-model="howTo"
-            class="form-control"
-            id="howTo"
-            rows="10"
-            placeholder="How to"
-            required
-          ></textarea>
-        </div>
-        <div class="form-group col-md-12 mt-2">
-          <input
-            v-model="prepTime"
-            type="text"
-            class="form-control"
-            placeholder="Prep time"
-          />
-        </div>
-        <div class="form-group col-md-12 mt-2">
-          <select
-            v-model="category"
-            id="provideCategory"
-            class="form-control"
-            placeholder="Category"
-            ><option value="" disabled selected hidden>Category</option>
-            <option v-for="i in provideCategory" v-bind:key="i">
-              {{ i }}
-            </option>
-          </select>
-        </div>
+        <form @submit.prevent="uploadRecipe">
+          <div class="form-group col-md-12">
+            <input
+              v-model="photo"
+              type="url"
+              class="form-control"
+              id="uploadPhoto"
+              placeholder="Image URL"
+            />
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <input
+              v-model="name"
+              type="text"
+              class="form-control"
+              id="provideName"
+              placeholder="Recipe name"
+              required
+            />
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <textarea
+              v-model="ingredients"
+              class="form-control"
+              id="listIngredients"
+              rows="5"
+              placeholder="Ingredients"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <textarea
+              v-model="howTo"
+              class="form-control"
+              id="howTo"
+              rows="12"
+              placeholder="How to"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <input
+              v-model="prepTime"
+              type="text"
+              class="form-control"
+              placeholder="Prep time"
+            />
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <select
+              v-model="category"
+              id="provideCategory"
+              class="form-control"
+              placeholder="Category"
+              ><option value="" disabled selected hidden>Category</option>
+              <option v-for="i in provideCategory" v-bind:key="i">
+                {{ i }}
+              </option>
+            </select>
+          </div>
 
-        <div class="text-center my-4">
-          <a class="btn viewRecipe mt-1" style="color:black">Upload a recipe</a>
-        </div>
+          <div class="text-center my-4">
+            <button type="submit" class="button">Upload a recipe</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -75,7 +77,7 @@
 export default {
   data() {
     return {
-      errorMessage: "",
+      /*   errorMessage: "", */
       photo: "",
       name: "",
       ingredients: "",
@@ -90,6 +92,24 @@ export default {
       ],
       category: "",
     };
+  },
+  methods: {
+    async uploadRecipe() {
+      let newRecipe = {
+        photo: this.photo,
+        name: this.name,
+        ingredients: this.ingredients,
+        howTo: this.howTo,
+        prepTime: this.prepTime,
+        provideCategory: this.provideCategory,
+      };
+      try {
+        await nesto.add(newRecipe);
+        alert("Recipe uploaded");
+      } catch (error) {
+        console.error("An error occurred", error);
+      }
+    },
   },
 };
 </script>
