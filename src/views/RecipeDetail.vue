@@ -7,7 +7,51 @@
           alt="Snow"
           style="width:100%"
         />
-        <div class="star"><i class="fa fa-star"></i></div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="terrible"
+            value="option1"
+          />
+          <label class="form-check-label" for="terrible">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="ok"
+            value="option2"
+          />
+          <label class="form-check-label" for="ok">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="good"
+            value="option3"
+          />
+          <label class="form-check-label" for="good">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="very-good"
+            value="option4"
+          />
+          <label class="form-check-label" for="very-good">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="excellent"
+            value="option5"
+          />
+          <label class="form-check-label" for="excellent">5</label>
+        </div>
       </div>
       <br />
       <br />
@@ -23,13 +67,7 @@
         <i>400g Chicken Breasts</i>
         <i>400g Chicken Breasts</i>
         <i>1 Cup Cherry Tomato</i>
-        <h5 class="heading_wrapper">DRESSING :</h5>
-        <i>Salt and Pepper</i>
-        <i>Salt and Pepper</i>
-        <i>Salt and Pepper</i>
-        <i>Salt and Pepper</i>
-        <i>Salt and Pepper</i>
-        <i>Salt and Pepper</i>
+
         <h5 class="heading_wrapper">HOW TO :</h5>
         <i
           >Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -74,6 +112,7 @@
     </div>
   </div>
 </template>
+
 <style scoped>
 .recipeIcon {
   width: 280px;
