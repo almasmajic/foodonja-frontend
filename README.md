@@ -1,19 +1,5 @@
 # foodonja-frontend
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* Frontend dio web-app Foodonja
+* Kolegij: [Web aplikacije](https://www.notion.so/Web-aplikacije-7ba8350d498546a78812399024edac44) 
+* Mentori: [doc.dr.sc.Nikola Tanković](http://ntankovic.unipu.hr/) i Nikki Bernobić, univ.bacc.inf.
