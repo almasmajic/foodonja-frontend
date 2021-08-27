@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <Header v-if="currentRouteName != 'Home'" />
+    <Header v-if="currentRouteName != 'Splashscreen'" />
     <img
       class="image1"
       src="./assets/ellipse.png"
-      v-if="currentRouteName != 'Home'"
+      v-if="currentRouteName != 'Splashscreen'"
     />
     <img
       class="image2"
       src="./assets/ellipse2.png"
-      v-if="currentRouteName != 'Home'"
+      v-if="currentRouteName != 'Splashscreen'"
     />
     <img
       class="image3"
       src="./assets/ellipse3.png"
-      v-if="currentRouteName != 'Home'"
+      v-if="currentRouteName != 'Splashscreen'"
     />
     <router-view />
   </div>

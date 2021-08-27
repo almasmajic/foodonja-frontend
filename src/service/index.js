@@ -26,7 +26,7 @@ let Filters = {
 
 let Auth = {
   async register(username, email, password) {
-    let response = await Service.post("/users", {
+    let response = await Service.put("/register", {
       username: username,
       email: email,
       password: password,

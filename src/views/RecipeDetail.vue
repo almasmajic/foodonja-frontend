@@ -7,11 +7,15 @@
           alt="Snow"
           style="width:100%"
         />
+        <h5 class="heading_wrapper center">
+          RECIPE NAME : {{ "ime recepta" }}
+        </h5>
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             id="terrible"
+            name="radioOptions"
             value="option1"
           />
           <label class="form-check-label" for="terrible">1</label>
@@ -19,8 +23,9 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             id="ok"
+            name="radioOptions"
             value="option2"
           />
           <label class="form-check-label" for="ok">2</label>
@@ -28,8 +33,9 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             id="good"
+            name="radioOptions"
             value="option3"
           />
           <label class="form-check-label" for="good">3</label>
@@ -37,8 +43,9 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             id="very-good"
+            name="radioOptions"
             value="option4"
           />
           <label class="form-check-label" for="very-good">4</label>
@@ -46,11 +53,15 @@
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
-            type="checkbox"
+            type="radio"
             id="excellent"
+            name="radioOptions"
             value="option5"
           />
           <label class="form-check-label" for="excellent">5</label>
+        </div>
+        <div>
+          <button type="submit" class="btn rateRecipe mt-3">Rate recipe</button>
         </div>
       </div>
       <br />
@@ -58,6 +69,7 @@
     </div>
     <div style="height:auto; margin:60px 420px">
       <div class="row">
+        <h5 class="heading_wrapper">AVERAGE RATING : {{ "30 min" }}</h5>
         <h5 class="heading_wrapper">PREP TIME : {{ "30 min" }}</h5>
         <br />
         <h5 class="heading_wrapper">INGREDIENTS :</h5>
@@ -80,29 +92,10 @@
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.</i
         >
-        <p class="heading_wrapper"><b>Published by :</b> GORDON RAMSAY</p>
+        <p class="heading_wrapper"><b>Published by :</b> DOHVATI IME</p>
         <p class="category_wrapper">
           <b>Category :</b> Dairy free, Sports Diet, Quick and Easy
         </p>
-        <h3 class="heading_wrapper">Our Reviews</h3>
-        <div class="reviews_wrapper">
-          <i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i>
-          <p class="category_wrapper">Nitin : "The Best Recipe of my life."</p>
-        </div>
-        <div class="reviews_wrapper">
-          <i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i>
-          <p class="category_wrapper">Nitin : "The Best Recipe of my life."</p>
-        </div>
-        <div class="reviews_wrapper">
-          <i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i><i class="fa fa-star"></i
-          ><i class="fa fa-star"></i>
-          <p class="category_wrapper">Nitin : "The Best Recipe of my life."</p>
-        </div>
       </div>
       <div class="form">
         <a href="#" class="btn removeRecipe mt-1"
@@ -113,17 +106,18 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {};
+  },
+};
+</script>
+
 <style scoped>
 .recipeIcon {
   width: 280px;
   position: relative;
-}
-.star {
-  position: absolute;
-  bottom: -44px;
-  color: gold;
-  left: 126px;
-  font-size: 20px;
 }
 .heading_wrapper {
   padding: 20px 0px 5px;
@@ -131,11 +125,15 @@
 .category_wrapper {
   padding: 5px 0px 5px;
 }
-.reviews_wrapper {
-  padding: 20px 10px 5px;
-}
 .removeRecipe {
   background-color: #fba6a6;
+  color: black;
+  font-size: 18px;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+.rateRecipe {
+  background-color: #7cb9e8;
   color: black;
   font-size: 18px;
   border-radius: 25px;
