@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header v-if="currentRouteName != 'Splashscreen'" />
+    <Header />
     <img
       class="image1"
       src="./assets/ellipse.png"

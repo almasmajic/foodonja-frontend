@@ -1,14 +1,20 @@
 <template>
   <div>
-    <img :src="info.url" alt="Avatar" style="width:100%" />
+    <img :src="info.image" alt="Avatar" style="width:100%" />
     <div class="container">
       <h5>
-        <i>{{ info.description }}</i>
+        <i>{{ info.name }}</i>
       </h5>
-      <p class="publishby">RECIPE PUBLISHED BY : {{ info.publishedBy }}</p>
+      <p class="publishby">
+        RECIPE PUBLISHED BY : {{ info.postedBy.username }}
+      </p>
       <a class="btn viewRecipe mt-1" @click="showRecipe()">RECIPE</a>
-      <span v-if="info.liked"><i class="fa fa-heart likebutton"></i></span>
-      <span v-if="!info.liked"><i class="far fa-heart likebutton"></i></span>
+      <span v-show="info.liked" @click="removeFavorite(info._id)"
+        ><i class="fa fa-heart likebutton"></i
+      ></span>
+      <span v-show="!info.liked" @click="addFavorite(info._id)"
+        ><i class="far fa-heart likebutton"></i
+      ></span>
       <div class="time">{{ info.time }}</div>
     </div>
   </div>
@@ -16,14 +22,14 @@
 
 <script>
 export default {
-  props: ["info"],
+  props: ["info", "addFavorite", "removeFavorite"],
   name: "RecipeCard",
   data() {
     return {};
   },
   methods: {
     showRecipe() {
-      this.$router.push({ name: "RecipeDetail" });
+      this.$router.push(`/recipe-detail/${this.info._id}`);
     },
   },
 };

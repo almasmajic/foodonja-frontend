@@ -74,6 +74,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { RecipeService } from "../service/index";
 export default {
   data() {
     return {
@@ -94,21 +96,18 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["UploadRecipe"]),
     async uploadRecipe() {
       let newRecipe = {
-        photo: this.photo,
+        image: this.photo,
         name: this.name,
         ingredients: this.ingredients,
-        howTo: this.howTo,
-        prepTime: this.prepTime,
-        provideCategory: this.provideCategory,
+        how_to: this.howTo,
+        prep_time: this.prepTime,
+        category: this.provideCategory,
       };
-      try {
-        await nesto.add(newRecipe);
-        alert("Recipe uploaded");
-      } catch (error) {
-        console.error("An error occurred", error);
-      }
+      await RecipeService.UploadRecipe(newRecipe);
+      alert("Recipe uploaded");
     },
   },
 };

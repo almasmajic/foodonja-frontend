@@ -70,7 +70,8 @@
 </template>
 
 <script>
-import { Auth } from "../service/index.js";
+import { mapActions } from "vuex";
+import { AuthService } from "../service/index";
 
 export default {
   data() {
@@ -85,11 +86,10 @@ export default {
   methods: {
     async login() {
       try {
-        let succes = await Auth.login(this.email, this.password);
-        console.log("Rezultat prijave", succes);
-        if ((succes == true && this.email !== "") || this.password !== "") {
-          this.$router.replace({ path: "/search" });
-          this.$router.go();
+        const result = await AuthService.login(this.email, this.password);
+        if (result && result.data && result.data.token) {
+          this.$router.push("/search");
+          this.showError = false;
         }
       } catch (e) {
         this.showError = true;

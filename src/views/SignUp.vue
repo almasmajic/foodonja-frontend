@@ -171,7 +171,7 @@
 </template>
 
 <script>
-import { Auth } from "../service/index.js";
+import { AuthService } from "../service/index";
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
@@ -230,14 +230,13 @@ export default {
         return false; // stop here if form is invalid
       } else {
         try {
-          let succes = await Auth.register(
+          const result = await AuthService.register(
             this.username,
             this.email,
             this.password
           );
-          console.log("Rezultat registracije", succes);
-          if (succes == true) {
-            this.$router.push({ path: "/search" });
+          if (result && result.data && result.data.id) {
+            this.$router.push("/login");
           }
         } catch (e) {
           console.log(e);

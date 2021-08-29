@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div v-if="isLoggedIn" class="header">
     <div class="logo">
       <router-link to="/search">
         <img class="logo" src="../assets/logo.svg" />
@@ -32,7 +32,7 @@
       </div>
       <div class="icon">
         <img src="../assets/headerIcons/egg.svg" />
-        <p class="text" style="margin-left: 15px">Plop out</p>
+        <p @click="logout" class="text" style="margin-left: 15px">Plop out</p>
         <br />
       </div>
     </div>
@@ -44,6 +44,19 @@ export default {
   name: "Header",
   props: {
     title: String,
+  },
+  computed: {
+    isLoggedIn: function() {
+      const user = localStorage.getItem("user");
+      if (!user) return false;
+      return true;
+    },
+  },
+  methods: {
+    async logout() {
+      localStorage.removeItem("user");
+      this.$router.push("/splashscreen");
+    },
   },
 };
 </script>

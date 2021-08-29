@@ -11,23 +11,29 @@
                 class="rounded-circle"
                 width="150"
               />
-              <div class="mt-3">
-                <h4>DOHVATI USERNAME</h4>
+              <div class="mt-3" v-if="user">
+                <h4>{{ user.username }}</h4>
               </div>
             </div>
           </div>
         </div>
         <div class="card mb-3 mt-3">
           <div class="card-body">
-            <form @submit.prevent="update">
+            <form @submit.prevent="updatePassword">
               <div class="row">
                 <div class="col-sm-3">
                   <h6 class="mb-0">Password</h6>
                   <input
-                    v-model="current_password"
+                    v-model="old_password"
                     type="password"
                     name="current_password"
                   />
+                  <div
+                    style="font-size:15px; color:red;"
+                    v-if="!$v.old_password.required"
+                  >
+                    Current password is required
+                  </div>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   ******
@@ -42,6 +48,12 @@
                     type="password"
                     name="new_password"
                   />
+                  <div
+                    style="font-size:15px; color:red;"
+                    v-if="!$v.new_password.required"
+                  >
+                    New password is required
+                  </div>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   ******
@@ -50,7 +62,13 @@
               <hr />
               <div class="row">
                 <div class="col-sm-12 d-flex justify-content-center">
-                  <button type="submit" class="button">Change password</button>
+                  <button
+                    :disabled="this.isDisabled"
+                    type="submit"
+                    class="button"
+                  >
+                    Change password
+                  </button>
                 </div>
               </div>
             </form>
@@ -60,6 +78,50 @@
     </div>
   </div>
 </template>
+
+<script>
+import { states, AuthService } from "../service/index";
+import { required, minLength } from "vuelidate/lib/validators";
+
+export default {
+  name: "myProfile",
+
+  data() {
+    return {
+      old_password: "",
+      new_password: "",
+      user: states.user,
+    };
+  },
+  validations: {
+    new_password: {
+      required,
+      minLength: minLength(6),
+    },
+    old_password: {
+      required,
+      minLength: minLength(6),
+    },
+  },
+  methods: {
+    async updatePassword() {
+      this.$v.$touch();
+      const result = await AuthService.UpdatePassword(
+        this.old_password,
+        this.new_password
+      );
+      if (result && result.data && result.data.message) {
+        alert(result.data.message);
+      }
+    },
+  },
+  computed: {
+    isDisabled() {
+      return this.$v.$invalid;
+    },
+  },
+};
+</script>
 
 <style scoped>
 body {

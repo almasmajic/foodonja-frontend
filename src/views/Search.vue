@@ -8,14 +8,18 @@
       />
     </div>
     <div style="height:auto; margin:40px 220px">
-      <div class="row">
+      <div class="row" v-if="filteredRecipes">
         <div
           class="col-4 mt-4 recipeWrapper"
           v-for="recipe in filteredRecipes"
-          :key="recipe.id"
+          :key="recipe._id"
         >
-          <div class="card">
-            <recipe-card :info="recipe" />
+          <div class="card" :key="recipe._id">
+            <recipe-card
+              :info="recipe"
+              :addFavorite="addFavorite"
+              :removeFavorite="removeFavorite"
+            />
           </div>
         </div>
       </div>
@@ -27,51 +31,7 @@
 import store from "@/store";
 import SearchFilterButton from "../components/SearchFilterButton.vue";
 import RecipeCard from "@/components/RecipeCard.vue";
-
-let recipes = [
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "The Best Recipe ever, you have to try.",
-    time: "Just now",
-    publishedBy: "GORDON RAMSAY",
-    liked: true,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDON RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "new pc",
-    time: "Just now",
-    publishedBy: "GORDON RAMSAY",
-    liked: true,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDON RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "new pc",
-    time: "Just now",
-    publishedBy: "GORDON RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDON RAMSAY",
-    liked: false,
-  },
-];
+import { states, RecipeService } from "../service/index";
 
 export default {
   name: "search",
@@ -79,20 +39,44 @@ export default {
   data() {
     return {
       store,
-      recipes,
+      recipes: [],
+      user: states.user,
     };
+  },
+  methods: {
+    setRecipes() {
+      this.recipes = states.recipes;
+    },
+    async addFavorite(id) {
+      await RecipeService.AddFavoriteRecipe(id);
+      this.setRecipes();
+    },
+    async removeFavorite(id) {
+      await RecipeService.DeleteFavoriteRecipe(id);
+      this.setRecipes();
+    },
+  },
+  created: async function() {
+    await RecipeService.GetRecipes();
+    this.setRecipes();
   },
   computed: {
     filteredRecipes() {
-      //filtriranje recepata
-      let condition = this.store.searchTerm; //condition je varijabla ciji se uvjet mora ispunit kako bi se trazili samo odredeni recepti
-      //console.log(condition);
+      let condition = this.store.searchTerm;
       let newRecipes = [];
-
       for (let recipe of this.recipes) {
-        //console.log(recipe.description);
-        if (recipe.description.indexOf(condition) >= 0) {
-          newRecipes.push(recipe);
+        const index = recipe?.favorites?.findIndex(
+          (el) => el._id === this.user._id
+        );
+        if (
+          recipe.name.indexOf(condition) >= 0 ||
+          recipe.category.indexOf(condition) >= 0
+        ) {
+          const filterRecipe = JSON.parse(JSON.stringify(recipe));
+          newRecipes.push({
+            ...filterRecipe,
+            liked: index > -1 ? true : false,
+          });
         }
       }
       return newRecipes;

@@ -1,13 +1,13 @@
 <template>
   <div class="row">
     <div class="column1">
-      <img :src="info.url" alt="Snow" style="width:100%" />
+      <img :src="info.image" alt="Snow" style="width:100%" />
     </div>
     <div class="column2">
       <p>
-        <i>{{ info.description }}</i>
+        <i>{{ info.name }}</i>
       </p>
-      <p class="publish">RECIPE PUBLISHED BY : {{ info.publishedBy }}</p>
+      <p class="publish">RECIPE PUBLISHED BY : {{ info.postedBy.username }}</p>
       <a class="btn viewRecipes mt-1" @click="showRecipe()">See Recipe</a>
     </div>
   </div>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     showRecipe() {
-      this.$router.push({ name: "RecipeDetail" });
+      this.$router.push(`/recipe-detail/${this.info._id}`);
     },
   },
 };

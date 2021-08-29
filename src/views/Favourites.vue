@@ -1,9 +1,12 @@
 <template>
   <div class="fav">
-    <h3 class="favHead">Show all favourites [{{ recipes.length }}]</h3>
-    <div class="row" v-for="recipe in recipes" :key="recipe.id">
+    <h3 class="favHead">Show all favourites [{{ favoriteRecipes.length }}]</h3>
+    <div class="row" v-for="recipe in favoriteRecipes" :key="recipe.id">
       <div class="card">
-        <FavRecipeCard :info="recipe" /><a href="#" class="btn remove mt-1"
+        <FavRecipeCard :info="recipe" /><a
+          href="#"
+          @click.prevent="removeFavorite(recipe._id)"
+          class="btn remove mt-1"
           >Remove from favourites</a
         >
       </div>
@@ -13,60 +16,47 @@
 
 <script>
 import FavRecipeCard from "@/components/FavRecipeCard.vue";
-let recipes = [
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "The Best Recipe even you eat, Please taste once.",
-    time: "Just now",
-    publishedBy: "GORDAN RAMSAY",
-    liked: true,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDAN RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "new pc",
-    time: "Just now",
-    publishedBy: "GORDAN RAMSAY",
-    liked: true,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDAN RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/1/500/350",
-    description: "new pc",
-    time: "Just now",
-    publishedBy: "GORDAN RAMSAY",
-    liked: false,
-  },
-  {
-    url: "https://picsum.photos/id/2/500/350",
-    description: "office",
-    time: "A day ago",
-    publishedBy: "GORDAN RAMSAY",
-    liked: false,
-  },
-];
+import { states, RecipeService } from "../service/index";
+
 export default {
   name: "Favourites",
   components: {
     FavRecipeCard,
   },
-
   data() {
     return {
-      recipes,
+      recipes: [],
+      user: states.user,
     };
+  },
+  created: async function() {
+    await RecipeService.GetRecipes();
+    this.setRecipes();
+  },
+  methods: {
+    setRecipes() {
+      this.recipes = states.recipes;
+    },
+    async removeFavorite(_id) {
+      await RecipeService.DeleteFavoriteRecipe(_id);
+      this.setRecipes();
+    },
+  },
+  computed: {
+    favoriteRecipes() {
+      let favRecipes = [];
+      for (let recipe of this.recipes) {
+        const index = recipe?.favorites?.findIndex(
+          (el) => el._id === this.user._id
+        );
+        if (index > -1) {
+          favRecipes.push({
+            ...JSON.parse(JSON.stringify(recipe)),
+          });
+        }
+      }
+      return favRecipes;
+    },
   },
 };
 </script>
