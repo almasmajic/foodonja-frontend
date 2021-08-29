@@ -10,55 +10,57 @@
         <h5 class="heading_wrapper center">
           RECIPE NAME : {{ "ime recepta" }}
         </h5>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="terrible"
-            name="radioOptions"
-            value="option1"
-          />
-          <label class="form-check-label" for="terrible">1</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="ok"
-            name="radioOptions"
-            value="option2"
-          />
-          <label class="form-check-label" for="ok">2</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="good"
-            name="radioOptions"
-            value="option3"
-          />
-          <label class="form-check-label" for="good">3</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="very-good"
-            name="radioOptions"
-            value="option4"
-          />
-          <label class="form-check-label" for="very-good">4</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            id="excellent"
-            name="radioOptions"
-            value="option5"
-          />
-          <label class="form-check-label" for="excellent">5</label>
+        <div class="rates">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="terrible"
+              name="radioOptions"
+              value="option1"
+            />
+            <label class="form-check-label" for="terrible">1</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="ok"
+              name="radioOptions"
+              value="option2"
+            />
+            <label class="form-check-label" for="ok">2</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="good"
+              name="radioOptions"
+              value="option3"
+            />
+            <label class="form-check-label" for="good">3</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="very-good"
+              name="radioOptions"
+              value="option4"
+            />
+            <label class="form-check-label" for="very-good">4</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              id="excellent"
+              name="radioOptions"
+              value="option5"
+            />
+            <label class="form-check-label" for="excellent">5</label>
+          </div>
         </div>
         <div>
           <button type="submit" class="btn rateRecipe mt-3">Rate recipe</button>
@@ -118,6 +120,13 @@ export default {
 .recipeIcon {
   width: 280px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.rates {
+  display: flex;
 }
 .heading_wrapper {
   padding: 20px 0px 5px;

@@ -92,4 +92,9 @@ export default {
   border-radius: 25px;
   margin: 0 auto;
 }
+.row,
+.favHead {
+  display: flex;
+  justify-content: center;
+}
 </style>
