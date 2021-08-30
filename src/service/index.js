@@ -23,7 +23,7 @@ function getBearerToken() {
 }
 
 let Service = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://foodonja-backend-almasmajic.vercel.app",
   timeout: 3000,
   headers: {
     Accept: "application/json",
