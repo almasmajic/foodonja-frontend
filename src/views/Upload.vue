@@ -102,7 +102,7 @@ export default {
         ingredients: this.ingredients,
         how_to: this.howTo,
         prep_time: this.prepTime,
-        category: this.provideCategory,
+        category: this.category,
       };
       await RecipeService.UploadRecipe(newRecipe);
       alert("Recipe uploaded");

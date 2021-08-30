@@ -79,7 +79,7 @@ export default {
           });
         }
       }
-      return newRecipes;
+      return newRecipes.reverse();
     },
   },
   components: {
