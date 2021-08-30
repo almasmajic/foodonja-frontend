@@ -12,8 +12,10 @@ function getBearerToken() {
   const token = localStorage.getItem("user")
     ? `${localStorage.getItem("user")}`
     : null;
-  const decoded = jwt_decode(token);
-  states.user = decoded;
+  if(token){
+    const decoded = jwt_decode(token);
+    states.user = decoded;
+  }
   const bearer = "Bearer " + token;
   console.log(`checking bearer: `, bearer);
   return bearer;
