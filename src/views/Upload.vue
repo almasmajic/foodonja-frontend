@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { RecipeService } from "../service/index";
 export default {
   data() {
@@ -96,7 +95,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["UploadRecipe"]),
     async uploadRecipe() {
       let newRecipe = {
         image: this.photo,

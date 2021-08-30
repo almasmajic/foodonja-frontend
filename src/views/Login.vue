@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { AuthService } from "../service/index";
 
 export default {
