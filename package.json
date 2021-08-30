@@ -1,6 +1,6 @@
 {
   "name": "foodonja-frontend",
-  "homepage": "https://foodonja-frontend.vercel.app/",
+  "homepage": "https://foodonja-frontend.vercel.app/foodonja-frontend/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
