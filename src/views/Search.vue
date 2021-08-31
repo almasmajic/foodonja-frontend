@@ -62,6 +62,7 @@ export default {
   },
   computed: {
     filteredRecipes() {
+      this.user = states.user;
       let condition = this.store.searchTerm;
       let newRecipes = [];
       for (let recipe of this.recipes) {
@@ -69,8 +70,10 @@ export default {
           (el) => el._id === this.user._id
         );
         if (
-          recipe.name.indexOf(condition) >= 0 ||
-          recipe.category.indexOf(condition) >= 0
+          (recipe.name &&
+            recipe.name?.toUpperCase().includes(condition?.toUpperCase())) ||
+          (recipe.category &&
+            recipe.category?.toUpperCase().includes(condition?.toUpperCase()))
         ) {
           const filterRecipe = JSON.parse(JSON.stringify(recipe));
           newRecipes.push({

@@ -45,17 +45,16 @@ export default {
   props: {
     title: String,
   },
-  computed: {
-    isLoggedIn: function() {
-      const user = localStorage.getItem("user");
-      if (!user) return false;
-      return true;
-    },
-  },
   methods: {
     async logout() {
       localStorage.removeItem("user");
       this.$router.push("/splashscreen");
+    },
+
+    isLoggedIn: function() {
+      const user = localStorage.getItem("user");
+      if (!user) return false;
+      return true;
     },
   },
 };

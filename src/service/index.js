@@ -12,9 +12,10 @@ function getBearerToken() {
   const token = localStorage.getItem("user")
     ? `${localStorage.getItem("user")}`
     : null;
-  if(token){
+  if (token) {
     const decoded = jwt_decode(token);
     states.user = decoded;
+    console.log(states);
   }
   const bearer = "Bearer " + token;
   console.log(`checking bearer: `, bearer);
@@ -24,13 +25,19 @@ function getBearerToken() {
 
 let Service = axios.create({
   baseURL: "https://foodonja-backend-almasmajic.vercel.app",
-  timeout: 3000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: getBearerToken(),
   },
 });
+
+Service.interceptors.request.use(
+  (config) => {
+    config.headers.common["Authorization"] = `${getBearerToken()}`;
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 const RecipeService = {
   async UploadRecipe(recipe) {
@@ -130,6 +137,7 @@ const AuthService = {
       if (response.data && response.data.token) {
         const user = response.data.token;
         localStorage.setItem("user", user);
+        getBearerToken();
         const decoded = jwt_decode(response.data.token);
         states.user = decoded;
       }
