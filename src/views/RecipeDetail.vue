@@ -94,7 +94,7 @@
           <b>Category :</b> {{ getRecipeDetail.category }}
         </p>
       </div>
-      <div class="form" v-if="getRecipeDetail.postedBy._id === user._id">
+      <div class="form" v-if="getRecipeDetail.postedBy._id === userVal._id">
         <a href="#" @click.prevent="deleteRecipe" class="btn removeRecipe mt-1"
           ><i class="fa fa-trash"></i> Delete this recipe</a
         >
@@ -120,6 +120,9 @@ export default {
     this.setRecipeDetial();
   },
   methods: {
+    userVal() {
+      return states.user;
+    },
     setRecipeDetial() {
       this.recipeDetail = states.recipeDetail;
     },
@@ -130,6 +133,7 @@ export default {
       }
     },
     async AddRemoveRating() {
+      this.user = states.user;
       const index = this.recipeDetail?.ratingData?.findIndex(
         (data) => data._id === this.user._id
       );

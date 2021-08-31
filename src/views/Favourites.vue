@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     favoriteRecipes() {
+      this.user = states.user;
       let favRecipes = [];
       for (let recipe of this.recipes) {
         const index = recipe?.favorites?.findIndex(
